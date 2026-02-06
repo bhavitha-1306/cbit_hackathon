@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Campus Services Portal - Admin Dashboard">
+    <title>Admin Dashboard - Campus Portal</title>
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>🎓 Campus Portal</h1>
+                <p>Admin Dashboard</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar">⚙️</div>
+                    <h3 id="adminName">Administrator</h3>
+                    <p id="adminRole">Super Admin</p>
+                </div>
+
+                <nav class="menu">
+                    <button class="menu-item active" onclick="showSection('home')">
+                        🏠 Dashboard Home
+                    </button>
+                    <button class="menu-item" onclick="showSection('createUser')">
+                        👤 Create User
+                    </button>
+                    <button class="menu-item" onclick="showSection('manageUsers')">
+                        🔐 Manage Users
+                    </button>
+                    <button class="menu-item" onclick="showSection('exceptions')">
+                        ⚠️ Exception Details
+                    </button>
+                    <button class="menu-item" onclick="showSection('auditLogs')">
+                        📋 Audit Logs
+                    </button>
+                    <button class="menu-item logout" onclick="logout()">
+                        🚪 Logout
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content">
+                <!-- Dashboard Home Section -->
+                <section id="home-section" class="section active">
+                    <h2>Admin Dashboard Overview</h2>
+                    <div class="dashboard-cards">
+                        <div class="card">
+                            <div class="card-icon">👥</div>
+                            <h3>Total Users</h3>
+                            <p id="totalUsers">0</p>
+                            <button class="btn" onclick="showSection('manageUsers')">View Users</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🔓</div>
+                            <h3>Active Users</h3>
+                            <p id="activeUsers">0</p>
+                            <button class="btn" onclick="showSection('manageUsers')">Manage</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🔒</div>
+                            <h3>Disabled Users</h3>
+                            <p id="disabledUsers">0</p>
+                            <button class="btn" onclick="showSection('manageUsers')">View</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">⚠️</div>
+                            <h3>Exceptions Found</h3>
+                            <p id="exceptionCount">0</p>
+                            <button class="btn" onclick="showSection('exceptions')">Review</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Create User Section -->
+                <section id="createUser-section" class="section">
+                    <h2>Create New User</h2>
+                    <div class="form-card">
+                        <form id="createUserForm">
+                            <div class="form-group">
+                                <label for="newUserName">Full Name</label>
+                                <input type="text" id="newUserName" placeholder="Enter full name" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newUserEmail">Email</label>
+                                <input type="email" id="newUserEmail" placeholder="Enter email" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newUserPassword">Password</label>
+                                <input type="password" id="newUserPassword" placeholder="Enter password" required />
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newUserRole">Role</label>
+                                <select id="newUserRole" required>
+                                    <option value="">-- Select Role --</option>
+                                    <option value="student">Student</option>
+                                    <option value="faculty">Faculty</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="newUserDept">Department / Roll</label>
+                                <input type="text" id="newUserDept" placeholder="e.g., CSE / 2024001" />
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Create User</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Manage Users Section -->
+                <section id="manageUsers-section" class="section">
+                    <h2>Manage Users</h2>
+                    <div class="controls">
+                        <input id="searchUser" placeholder="Search by name, email, or ID" style="flex:1;padding:8px;border-radius:8px;border:1px solid #e6f3f8" />
+                        <select id="filterRole" style="padding:8px;border-radius:8px;border:1px solid #e6f3f8">
+                            <option value="">All Roles</option>
+                            <option value="student">Student</option>
+                            <option value="faculty">Faculty</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                        <select id="filterStatus" style="padding:8px;border-radius:8px;border:1px solid #e6f3f8">
+                            <option value="">All Status</option>
+                            <option value="active">Active</option>
+                            <option value="disabled">Disabled</option>
+                        </select>
+                        <button class="btn" onclick="renderUsers()">Filter</button>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Exception Details Section -->
+                <section id="exceptions-section" class="section">
+                    <h2>Exception Details & Suspicious Activity</h2>
+                    <div class="controls">
+                        <select id="filterExceptionType" style="padding:8px;border-radius:8px;border:1px solid #e6f3f8">
+                            <option value="">All Types</option>
+                            <option value="unusual_approval">Unusual Approvals</option>
+                            <option value="repeated_rejection">Repeated Rejections</option>
+                            <option value="suspicious">Suspicious Activity</option>
+                        </select>
+                        <button class="btn" onclick="renderExceptions()">Filter</button>
+                    </div>
+
+                    <div id="exceptionsList"></div>
+                </section>
+
+                <!-- Audit Logs Section -->
+                <section id="auditLogs-section" class="section">
+                    <h2>Audit Logs</h2>
+                    <div class="controls">
+                        <input id="auditSearch" placeholder="Search logs..." style="flex:1;padding:8px;border-radius:8px;border:1px solid #e6f3f8" />
+                        <button class="btn" onclick="renderAuditLogs()">Search</button>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>User</th>
+                                    <th>Action</th>
+                                    <th>Details</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="auditTbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2026 Campus Portal. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms & Conditions</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    // Admin Dashboard Script
+
+    // Section navigation
+    function showSection(name) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(s => s.classList.remove('active'));
+        const el = document.getElementById(name + '-section');
+        if (el) el.classList.add('active');
+        
+        document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+        const btn = Array.from(document.querySelectorAll('.menu-item')).find(b => 
+            b.getAttribute('onclick') && b.getAttribute('onclick').includes("showSection('" + name + "')")
+        );
+        if (btn) btn.classList.add('active');
+
+        // Render data when section opens
+        if (name === 'manageUsers') renderUsers();
+        if (name === 'exceptions') renderExceptions();
+        if (name === 'auditLogs') renderAuditLogs();
+        if (name === 'home') updateDashboard();
+    }
+
+    function logout() {
+        if (confirm('Logout?')) window.location.href = 'login.html';
+    }
+
+    // Data Management
+    function getUsers() { 
+        try { 
+            return JSON.parse(localStorage.getItem('adminUsers') || '[]'); 
+        } catch (e) { 
+            return []; 
+        } 
+    }
+
+    function saveUsers(arr) { 
+        localStorage.setItem('adminUsers', JSON.stringify(arr)); 
+    }
+
+    function getAuditLogs() { 
+        try { 
+            return JSON.parse(localStorage.getItem('auditLogs') || '[]'); 
+        } catch (e) { 
+            return []; 
+        } 
+    }
+
+    function saveAuditLogs(arr) { 
+        localStorage.setItem('auditLogs', JSON.stringify(arr)); 
+    }
+
+    function getExceptions() { 
+        try { 
+            return JSON.parse(localStorage.getItem('exceptions') || '[]'); 
+        } catch (e) { 
+            return []; 
+        } 
+    }
+
+    function saveExceptions(arr) { 
+        localStorage.setItem('exceptions', JSON.stringify(arr)); 
+    }
+
+    function logAction(user, action, details, status) {
+        const log = {
+            timestamp: new Date().toISOString(),
+            user: user || 'System',
+            action: action,
+            details: details,
+            status: status || 'Success'
+        };
+        const logs = getAuditLogs();
+        logs.unshift(log);
+        saveAuditLogs(logs);
+    }
+
+    // Create User
+    document.getElementById('createUserForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('newUserName').value;
+        const email = document.getElementById('newUserEmail').value;
+        const pwd = document.getElementById('newUserPassword').value;
+        const role = document.getElementById('newUserRole').value;
+        const dept = document.getElementById('newUserDept').value;
+
+        if (!name || !email || !pwd || !role) return alert('Fill all required fields');
+
+        const users = getUsers();
+        const uid = 'USR' + Date.now().toString().slice(-6);
+        users.push({
+            id: uid,
+            name: name,
+            email: email,
+            password: pwd,
+            role: role,
+            dept: dept,
+            status: 'active',
+            created: new Date().toISOString()
+        });
+        saveUsers(users);
+        logAction('Admin', 'Create User', `Created user ${uid} (${role})`, 'Success');
+        document.getElementById('createUserForm').reset();
+        alert('User ' + uid + ' created successfully');
+        updateDashboard();
+    });
+
+    // Render Users
+    function renderUsers() {
+        const tbody = document.getElementById('usersTbody');
+        tbody.innerHTML = '';
+        const search = document.getElementById('searchUser')?.value.toLowerCase() || '';
+        const role = document.getElementById('filterRole')?.value || '';
+        const status = document.getElementById('filterStatus')?.value || '';
+
+        let arr = getUsers();
+        arr = arr.filter(u => {
+            if (search && !(u.name.toLowerCase().includes(search) || u.email.toLowerCase().includes(search) || u.id.includes(search))) return false;
+            if (role && u.role !== role) return false;
+            if (status && u.status !== status) return false;
+            return true;
+        });
+
+        arr.forEach(u => {
+            const tr = document.createElement('tr');
+            const statusBadge = `<span class="badge ${u.status === 'active' ? 'approved' : 'rejected'}">${u.status.toUpperCase()}</span>`;
+            tr.innerHTML = `
+                <td>${u.id}</td>
+                <td>${u.name}</td>
+                <td>${u.email}</td>
+                <td>${u.role.toUpperCase()}</td>
+                <td>${statusBadge}</td>
+                <td>
+                    <button class="btn btn-small" onclick="toggleUserStatus('${u.id}')">${u.status === 'active' ? 'Disable' : 'Enable'}</button>
+                    <button class="btn btn-small" onclick="changeUserRole('${u.id}')">Change Role</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function toggleUserStatus(uid) {
+        const users = getUsers();
+        const u = users.find(x => x.id === uid);
+        if (!u) return alert('User not found');
+        u.status = u.status === 'active' ? 'disabled' : 'active';
+        saveUsers(users);
+        logAction('Admin', u.status === 'disabled' ? 'Disable User' : 'Enable User', `${u.status} user ${uid}`, 'Success');
+        renderUsers();
+        updateDashboard();
+    }
+
+    function changeUserRole(uid) {
+        const users = getUsers();
+        const u = users.find(x => x.id === uid);
+        if (!u) return alert('User not found');
+        const newRole = prompt('New role (student/faculty/admin):', u.role);
+        if (!newRole || !['student', 'faculty', 'admin'].includes(newRole)) return;
+        u.role = newRole;
+        saveUsers(users);
+        logAction('Admin', 'Change User Role', `Changed ${uid} to ${newRole}`, 'Success');
+        renderUsers();
+    }
+
+    // Exception Detection
+    function detectExceptions() {
+        const reqs = JSON.parse(localStorage.getItem('studentRequests') || '[]');
+        const users = getUsers();
+        const exceptions = [];
+
+        // Check for unusual approvals (high approval rate for one user)
+        const approvalsByUser = {};
+        reqs.forEach(r => {
+            if (r.status === 'Approved') {
+                approvalsByUser[r.userId] = (approvalsByUser[r.userId] || 0) + 1;
+            }
+        });
+        Object.entries(approvalsByUser).forEach(([userId, count]) => {
+            if (count > 3) {
+                exceptions.push({
+                    id: 'EX' + Date.now(),
+                    type: 'unusual_approval',
+                    severity: 'medium',
+                    description: `User has ${count} approvals (unusual pattern)`,
+                    userId: userId,
+                    date: new Date().toISOString()
+                });
+            }
+        });
+
+        // Check for repeated rejections
+        const rejectionsByUser = {};
+        reqs.forEach(r => {
+            if (r.status === 'Rejected') {
+                rejectionsByUser[r.userId] = (rejectionsByUser[r.userId] || 0) + 1;
+            }
+        });
+        Object.entries(rejectionsByUser).forEach(([userId, count]) => {
+            if (count > 2) {
+                exceptions.push({
+                    id: 'EX' + Date.now() + Math.random(),
+                    type: 'repeated_rejection',
+                    severity: 'low',
+                    description: `User has ${count} rejections (possible issue with submissions)`,
+                    userId: userId,
+                    date: new Date().toISOString()
+                });
+            }
+        });
+
+        saveExceptions(exceptions);
+    }
+
+    function renderExceptions() {
+        detectExceptions();
+        const div = document.getElementById('exceptionsList');
+        div.innerHTML = '';
+        const filterType = document.getElementById('filterExceptionType')?.value || '';
+
+        let arr = getExceptions();
+        arr = arr.filter(e => !filterType || e.type === filterType);
+
+        if (arr.length === 0) {
+            div.innerHTML = '<p>No exceptions found.</p>';
+            return;
+        }
+
+        arr.forEach(ex => {
+            const d = document.createElement('div');
+            d.className = 'notice-item';
+            const severityColor = ex.severity === 'high' ? '#b42318' : ex.severity === 'medium' ? '#c07a00' : '#027a48';
+            d.innerHTML = `
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>
+                        <strong style="color:${severityColor}">${ex.type.replace(/_/g, ' ').toUpperCase()}</strong> (${ex.id})
+                        <p style="margin:4px 0 0 0;color:#556">${ex.description}</p>
+                        <div style="font-size:12px;color:#889;margin-top:4px">Detected: ${new Date(ex.date).toLocaleString()}</div>
+                    </div>
+                    <button class="btn btn-small" onclick="resolveException('${ex.id}')">Resolve</button>
+                </div>
+            `;
+            div.appendChild(d);
+        });
+    }
+
+    function resolveException(id) {
+        const arr = getExceptions();
+        const idx = arr.findIndex(e => e.id === id);
+        if (idx > -1) {
+            arr.splice(idx, 1);
+            saveExceptions(arr);
+            logAction('Admin', 'Resolve Exception', `Resolved exception ${id}`, 'Success');
+            renderExceptions();
+            updateDashboard();
+        }
+    }
+
+    // Render Audit Logs
+    function renderAuditLogs() {
+        const tbody = document.getElementById('auditTbody');
+        tbody.innerHTML = '';
+        const search = document.getElementById('auditSearch')?.value.toLowerCase() || '';
+
+        let arr = getAuditLogs();
+        arr = arr.filter(l => !search || l.action.toLowerCase().includes(search) || l.user.toLowerCase().includes(search));
+
+        arr.slice(0, 50).forEach(l => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td style="font-size:12px">${new Date(l.timestamp).toLocaleString()}</td>
+                <td>${l.user}</td>
+                <td>${l.action}</td>
+                <td style="font-size:12px">${l.details}</td>
+                <td><span class="badge ${l.status === 'Success' ? 'approved' : 'rejected'}">${l.status}</span></td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Update Dashboard Stats
+    function updateDashboard() {
+        const users = getUsers();
+        const active = users.filter(u => u.status === 'active').length;
+        const disabled = users.filter(u => u.status === 'disabled').length;
+        detectExceptions();
+        const exceptions = getExceptions().length;
+
+        document.getElementById('totalUsers').textContent = users.length;
+        document.getElementById('activeUsers').textContent = active;
+        document.getElementById('disabledUsers').textContent = disabled;
+        document.getElementById('exceptionCount').textContent = exceptions;
+    }
+
+    // Init
+    (function() {
+        document.getElementById('adminName').textContent = 'Admin User';
+        updateDashboard();
+        renderAuditLogs();
+    })();
+    </script>
+</body>
+</html>

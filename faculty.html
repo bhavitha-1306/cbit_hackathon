@@ -87,11 +87,30 @@
                 <!-- View Requests Section -->
                 <section id="viewRequests-section" class="section">
                     <h2>View Requests</h2>
-                    <div class="filters">
-                        <select id="filterPurpose"><option value="">All Purposes</option><option value="bonafide_exam">Bonafide (Exam)</option><option value="bonafide_scholarship">Bonafide (Scholarship)</option><option value="complaint">Complaint</option></select>
-                        <select id="filterStatus"><option value="">All Status</option><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option></select>
-                        <input id="searchText" placeholder="Search by ID or description" />
-                        <button class="btn" onclick="renderRequests()">Apply</button>
+                    <div class="filters" style="background: linear-gradient(135deg, #f8fbff 0%, #f0f8fc 100%); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; border: 1px solid rgba(15, 90, 127, 0.1); display: flex; gap: 1rem; flex-wrap: wrap; align-items: flex-end;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="font-weight: 600; color: #047857; display: block; margin-bottom: 0.5rem;">Purpose</label>
+                            <select id="filterPurpose" style="width: 100%; padding: 0.75rem; border: 1px solid #d0d5dd; border-radius: 6px; font-size: 0.95rem; background: white;">
+                                <option value="">All Purposes</option>
+                                <option value="bonafide_exam">Bonafide (Exam)</option>
+                                <option value="bonafide_scholarship">Bonafide (Scholarship)</option>
+                                <option value="complaint">Complaint</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="font-weight: 600; color: #047857; display: block; margin-bottom: 0.5rem;">Status</label>
+                            <select id="filterStatus" style="width: 100%; padding: 0.75rem; border: 1px solid #d0d5dd; border-radius: 6px; font-size: 0.95rem; background: white;">
+                                <option value="">All Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </div>
+                        <div style="flex: 1; min-width: 200px;">
+                            <label style="font-weight: 600; color: #047857; display: block; margin-bottom: 0.5rem;">Search</label>
+                            <input id="searchText" placeholder="Search by ID or description" style="width: 100%; padding: 0.75rem; border: 1px solid #d0d5dd; border-radius: 6px; font-size: 0.95rem;" />
+                        </div>
+                        <button class="btn" onclick="renderRequests()" style="background: linear-gradient(135deg, #0f5a7f 0%, #1a7ba5 100%); padding: 0.75rem 2rem; font-weight: 600;">Apply</button>
                     </div>
 
                     <div class="table-wrapper">
@@ -115,10 +134,10 @@
                 <!-- Bulk Approve Section -->
                 <section id="bulkApprove-section" class="section">
                     <h2>Bulk Approve</h2>
-                    <div class="controls">
-                        <button class="btn btn-primary" onclick="bulkApproveSelected()">Approve Selected</button>
-                        <button class="btn" onclick="selectAllVisible(true)">Select All</button>
-                        <button class="btn" onclick="selectAllVisible(false)">Clear Selection</button>
+                    <div class="controls" style="background: linear-gradient(135deg, #1e5a96 0%, #2a7cb5 100%); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; box-shadow: 0 8px 24px rgba(15, 90, 127, 0.15);">
+                        <button class="btn btn-primary" onclick="bulkApproveSelected()" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; flex: 1; min-width: 220px; font-weight: 700; padding: 0.95rem 1.5rem; font-size: 1rem; box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35); border-radius: 8px; border: none; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 20px rgba(16, 185, 129, 0.45)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 16px rgba(16, 185, 129, 0.35)';">✅ Approve Selected</button>
+                        <button class="btn" onclick="selectAllVisible(true)" style="background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15)); color: white; border: 2px solid rgba(255,255,255,0.5); flex: 1; min-width: 160px; font-weight: 600; padding: 0.85rem 1.5rem; font-size: 0.95rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.25))'; this.style.boxShadow='0 4px 12px rgba(255,255,255,0.2)';" onmouseout="this.style.background='linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15))'; this.style.boxShadow='none';">☑️ Select All</button>
+                        <button class="btn" onclick="selectAllVisible(false)" style="background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15)); color: white; border: 2px solid rgba(255,255,255,0.5); flex: 1; min-width: 160px; font-weight: 600; padding: 0.85rem 1.5rem; font-size: 0.95rem; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.background='linear-gradient(135deg, rgba(255,255,255,0.35), rgba(255,255,255,0.25))'; this.style.boxShadow='0 4px 12px rgba(255,255,255,0.2)';" onmouseout="this.style.background='linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.15))'; this.style.boxShadow='none';">✖️ Clear</button>
                     </div>
                     <table class="table">
                         <thead><tr><th></th><th>Request ID</th><th>Purpose</th><th>Description</th><th>Status</th></tr></thead>
@@ -135,16 +154,18 @@
                 <!-- Upload Notices Section -->
                 <section id="uploadNotices-section" class="section">
                     <h2>Upload Notice</h2>
-                    <form id="noticeForm">
+                    <form id="noticeForm" style="background: linear-gradient(135deg, #f8fbff 0%, #f0f8fc 100%); padding: 2rem; border-radius: 10px; border: 1px solid rgba(15, 90, 127, 0.1); margin-bottom: 2rem; max-width: 600px;">
                         <div class="form-group">
-                            <input id="noticeTitle" placeholder="Title" required />
+                            <label style="font-weight: 600; color: #0f5a7f;">Notice Title</label>
+                            <input id="noticeTitle" placeholder="Enter notice title" required style="width: 100%; padding: 0.75rem; border: 1px solid #d0d5dd; border-radius: 6px; font-size: 0.95rem; margin-top: 0.5rem;" />
                         </div>
                         <div class="form-group">
-                            <textarea id="noticeBody" rows="4" placeholder="Notice body" required></textarea>
+                            <label style="font-weight: 600; color: #0f5a7f;">Notice Body</label>
+                            <textarea id="noticeBody" rows="5" placeholder="Enter notice content" required style="width: 100%; padding: 0.75rem; border: 1px solid #d0d5dd; border-radius: 6px; font-size: 0.95rem; margin-top: 0.5rem; font-family: inherit;"></textarea>
                         </div>
-                        <button class="btn btn-primary" type="submit">Post Notice</button>
+                        <button class="btn btn-primary" type="submit" style="background: linear-gradient(135deg, #0f5a7f 0%, #1a7ba5 100%); width: 100%; padding: 0.85rem; font-weight: 600;">📢 Post Notice</button>
                     </form>
-                    <h3>Posted Notices</h3>
+                    <h3 style="color: #0f5a7f; margin-bottom: 1rem;">📋 Posted Notices</h3>
                     <div id="postedNotices"></div>
                 </section>
 
