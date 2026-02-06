@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Campus Services Portal - Student Dashboard">
+    <title>Student Dashboard - Campus Portal</title>
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍🎓</text></svg>">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>🎓 Campus Portal</h1>
+                <p>Student Dashboard</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar">👨‍🎓</div>
+                    <h3 id="studentName">Student Name</h3>
+                    <p id="studentRoll">Roll Number</p>
+                </div>
+
+                <nav class="menu">
+                    <button class="menu-item active" onclick="showSection('home')">
+                        🏠 Student Home
+                    </button>
+                    <button class="menu-item" onclick="showSection('bonafide')">
+                        🎫 Request Bonafide
+                    </button>
+                    <button class="menu-item" onclick="showSection('complaint')">
+                        📝 Request Complaint
+                    </button>
+                    <button class="menu-item" onclick="showSection('status')">
+                        📊 My Request Status
+                    </button>
+                    <button class="menu-item" onclick="showSection('receipts')">
+                        📥 Download Receipts
+                    </button>
+                    <button class="menu-item" onclick="showSection('notices')">
+                        📢 Notice & Circular
+                    </button>
+                    <button class="menu-item logout" onclick="logout()">
+                        🚪 Logout
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content">
+                <!-- Student Home Section -->
+                <section id="home-section" class="section active">
+                    <h2>Welcome to Your Dashboard</h2>
+                    <div class="dashboard-cards">
+                        <div class="card">
+                            <div class="card-icon">📝</div>
+                            <h3>My Complaints</h3>
+                            <p>Track all your complaints and requests</p>
+                            <button class="btn" onclick="showSection('complaint')">View</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🎫</div>
+                            <h3>Request Bonafide</h3>
+                            <p>Request official bonafide letters for exams, scholarships, banks, etc.</p>
+                            <button class="btn" onclick="showSection('bonafide')">Request</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📊</div>
+                            <h3>Request Status</h3>
+                            <p>Check the status of your requests</p>
+                            <button class="btn" onclick="showSection('status')">Check Status</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📥</div>
+                            <h3>Receipts</h3>
+                            <p>Download your payment receipts</p>
+                            <button class="btn" onclick="showSection('receipts')">Download</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📢</div>
+                            <h3>Notices</h3>
+                            <p>View latest notices and circulars</p>
+                            <button class="btn" onclick="showSection('notices')">View</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Request Bonafide Section -->
+                <section id="bonafide-section" class="section">
+                    <h2>Request Bonafide</h2>
+                    <div class="form-card">
+                        <form id="bonafideForm">
+                            <div class="form-group">
+                                <label for="bonafidePurpose">Select Purpose</label>
+                                <select id="bonafidePurpose" required>
+                                    <option value="">-- Select Purpose --</option>
+                                    <option value="bonafide_exam">Bonafide (Exam)</option>
+                                    <option value="bonafide_scholarship">Bonafide (Scholarship)</option>
+                                    <option value="bonafide_bank">Bonafide (Bank)</option>
+                                    <option value="bonafide_other">Bonafide (Other)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bonafideDesc">Description / Notes</label>
+                                <textarea id="bonafideDesc" rows="4" placeholder="Provide any additional details or attachments required" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bonafideAttach">Attachment (Optional)</label>
+                                <input type="file" id="bonafideAttach">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit Request</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Request Complaint Section -->
+                <section id="complaint-section" class="section">
+                    <h2>Request Complaint</h2>
+                    <div class="form-card">
+                        <form id="complaintForm">
+                            <div class="form-group">
+                                <label for="complaintPurpose">Select Purpose</label>
+                                <select id="complaintPurpose" required>
+                                    <option value="">-- Select Purpose --</option>
+                                    <option value="exam">Exam Related</option>
+                                    <option value="scholarship">Scholarship</option>
+                                    <option value="certificate">Certificate</option>
+                                    <option value="fee">Fee Related</option>
+                                    <option value="hostel">Hostel Issue</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="complaintDesc">Description</label>
+                                <textarea id="complaintDesc" rows="5" placeholder="Describe your request in detail" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="complaintAttach">Attachment (Optional)</label>
+                                <input type="file" id="complaintAttach">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit Request</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- My Request Status Section -->
+                <section id="status-section" class="section">
+                    <h2>My Request Status</h2>
+                                    <div id="requestsList" class="status-list">
+                                        <!-- Requests will be rendered here by dashboard-script.js -->
+                                    </div>
+                </section>
+
+                <!-- Download Receipts Section -->
+                <section id="receipts-section" class="section">
+                    <h2>Download Receipts</h2>
+                    <div class="receipts-list">
+                        <div class="receipt-item">
+                            <div class="receipt-info">
+                                <h4>Semester Fee Receipt</h4>
+                                <p>Jan 2026 - Amount: ₹50,000</p>
+                            </div>
+                            <button class="btn btn-small" onclick="downloadReceipt('Semester Fee Receipt')">Download</button>
+                        </div>
+
+                        <div class="receipt-item">
+                            <div class="receipt-info">
+                                <h4>Examination Fee Receipt</h4>
+                                <p>Feb 2026 - Amount: ₹5,000</p>
+                            </div>
+                            <button class="btn btn-small" onclick="downloadReceipt('Examination Fee Receipt')">Download</button>
+                        </div>
+
+                        <div class="receipt-item">
+                            <div class="receipt-info">
+                                <h4>Library Fine Payment</h4>
+                                <p>Jan 2026 - Amount: ₹500</p>
+                            </div>
+                            <button class="btn btn-small" onclick="downloadReceipt('Library Fine Payment')">Download</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Notice & Circular Section -->
+                <section id="notices-section" class="section">
+                    <h2>Notice & Circular</h2>
+                    <div class="notices-list">
+                        <div class="notice-item">
+                            <div class="notice-date">Feb 5, 2026</div>
+                            <h4>Semester Examination Schedule Released</h4>
+                            <p>The examination schedule for the current semester has been released. Please check your exam dates and report any conflicts.</p>
+                            <a href="#" class="notice-link">Read More →</a>
+                        </div>
+
+                        <div class="notice-item">
+                            <div class="notice-date">Feb 3, 2026</div>
+                            <h4>Library Extension Hours</h4>
+                            <p>The library will be extended till 10 PM during exam season. All students are welcome to utilize the extended hours.</p>
+                            <a href="#" class="notice-link">Read More →</a>
+                        </div>
+
+                        <div class="notice-item">
+                            <div class="notice-date">Feb 1, 2026</div>
+                            <h4>Fee Payment Deadline Extended</h4>
+                            <p>The semester fee payment deadline has been extended to February 28, 2026. No late fees will be charged for payments before this date.</p>
+                            <a href="#" class="notice-link">Read More →</a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <!-- Dev toggle for testing approvals (hidden in production) -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2026 Campus Portal. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms & Conditions</a>
+                    <a href="#contact">Contact Us</a>
+                    <a id="devToggleLink" href="#" onclick="toggleDevMode(); return false;">Dev Controls: Off</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="dashboard-script.js"></script>
+</body>
+</html>

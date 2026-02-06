@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Campus Services Portal - Registration">
+    <title>Campus Services Portal - Register</title>
+    <link rel="stylesheet" href="registration-styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+</head>
+<body>
+    <div class="registration-container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="header-content">
+                <h1 class="college-name">🎓 Campus Portal</h1>
+                <p class="college-tagline">Secure Education Management System</p>
+            </div>
+        </div>
+
+        <!-- Main Registration Section -->
+        <div class="main-content">
+            <!-- Role Selection Phase -->
+            <div id="roleSelectionPhase" class="registration-card">
+                <h2 class="main-title">Create Your Account</h2>
+                <p class="subtitle">Select your role</p>
+
+                <!-- Role Selection Buttons (Tab Style) -->
+                <div class="role-tabs">
+                    <button class="role-tab student-tab" onclick="selectRole('student')" id="studentTab">
+                        👨‍🎓 Student
+                    </button>
+                    <button class="role-tab faculty-tab" onclick="selectRole('faculty')" id="facultyTab">
+                        👨‍🏫 Faculty
+                    </button>
+                    <button class="role-tab admin-tab" onclick="selectRole('admin')" id="adminTab">
+                        👨‍💼 Admin
+                    </button>
+                </div>
+
+                <!-- Registration Form -->
+                <form id="registrationForm" class="registration-form">
+                    <!-- Full Name Field -->
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            placeholder="Enter your full name"
+                            required
+                        >
+                        <span class="error-message" id="fullNameError"></span>
+                    </div>
+
+                    <!-- Student: Roll Number -->
+                    <div class="form-group" id="rollNumberGroup" style="display: none;">
+                        <label for="rollNumber">Roll Number</label>
+                        <input 
+                            type="text" 
+                            id="rollNumber" 
+                            name="rollNumber" 
+                            placeholder="e.g., 2024001"
+                            required
+                        >
+                        <span class="error-message" id="rollNumberError"></span>
+                    </div>
+
+                    <!-- Faculty/Admin: Employee ID -->
+                    <div class="form-group" id="employeeIdGroup" style="display: none;">
+                        <label for="employeeId">Employee ID</label>
+                        <input 
+                            type="text" 
+                            id="employeeId" 
+                            name="employeeId" 
+                            placeholder="e.g., EMP123456"
+                            required
+                        >
+                        <span class="error-message" id="employeeIdError"></span>
+                    </div>
+
+                    <!-- Faculty: Department -->
+                    <div class="form-group" id="departmentGroup" style="display: none;">
+                        <label for="department">Department</label>
+                        <select id="department" name="department" required>
+                            <option value="">Select your department</option>
+                            <option value="cse">Computer Science Engineering</option>
+                            <option value="ece">Electronics & Communication</option>
+                            <option value="me">Mechanical Engineering</option>
+                            <option value="ce">Civil Engineering</option>
+                            <option value="ee">Electrical Engineering</option>
+                        </select>
+                        <span class="error-message" id="departmentError"></span>
+                    </div>
+
+                    <!-- College Email Field -->
+                    <div class="form-group">
+                        <label for="collegeEmail">College Email</label>
+                        <input 
+                            type="email" 
+                            id="collegeEmail" 
+                            name="collegeEmail" 
+                            placeholder="your.name@college.edu"
+                            required
+                        >
+                        <span class="error-message" id="collegeEmailError"></span>
+                    </div>
+
+                    <!-- Password Field -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Create a strong password"
+                                required
+                            >
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">👁️</button>
+                        </div>
+                        <div id="passwordStrength" class="password-strength"></div>
+                        <span class="password-hint">Min 12 characters: uppercase, lowercase, numbers, special characters</span>
+                        <span class="error-message" id="passwordError"></span>
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                placeholder="Confirm your password"
+                                required
+                            >
+                            <button type="button" class="toggle-password" onclick="toggleConfirmPasswordVisibility()">👁️</button>
+                        </div>
+                        <span class="error-message" id="confirmPasswordError"></span>
+                    </div>
+
+                    <!-- Terms & Conditions -->
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">I agree to the Terms & Conditions and Privacy Policy</label>
+                        <span class="error-message" id="termsError"></span>
+                    </div>
+
+                    <!-- Alert Message -->
+                    <div id="alertMessage" class="alert alert-hidden"></div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-register">Create Account</button>
+                </form>
+
+                <!-- Already have account -->
+                <div class="login-section">
+                    <p>Already have an account? <a href="login.html" class="login-link">Login here</a></p>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2026 Campus Portal. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms & Conditions</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="registration-script.js"></script>
+</body>
+</html>

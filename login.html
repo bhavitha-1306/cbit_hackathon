@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Campus Services Portal - Login">
+    <title>Campus Portal - Login</title>
+    <link rel="stylesheet" href="login-styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>🎓 Campus Portal</h1>
+            </div>
+
+            <div id="alertMessage" class="alert alert-hidden"></div>
+
+            <form id="loginForm" method="POST" novalidate>
+                <!-- Email/Username -->
+                <div class="form-group">
+                    <label for="email">Email or Roll Number</label>
+                    <input 
+                        type="text" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email or roll number"
+                        required
+                        maxlength="255"
+                    >
+                    <span class="error-msg" id="emailError"></span>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Enter your password"
+                            required
+                            maxlength="128"
+                        >
+                        <button type="button" class="toggle-pwd" id="togglePassword">👁️</button>
+                    </div>
+                    <span class="error-msg" id="passwordError"></span>
+                </div>
+
+                <!-- Remember Me & Forgot Password -->
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <!-- Login Button -->
+                <button type="submit" class="btn btn-login" id="loginBtn">
+                    <span class="btn-text">Login Securely</span>
+                    <span class="btn-loader" style="display: none;">⏳</span>
+                </button>
+            </form>
+
+            <!-- Sign Up Link -->
+            <div class="signup-section">
+                <p>Don't have an account? <a href="registration.html">Sign up here</a></p>
+            </div>
+        </div>
+
+        <!-- Decorative background -->
+        <div class="background-decoration"></div>
+    </div>
+
+    <script src="login-script.js"></script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+/* ============================================
+   LOGIN PAGE - STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0f5a7f;
+    --primary-light: #1a7ba5;
+    --secondary-color: #06a77d;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background: #f0f4f8;
+    min-height: 100vh;
+    color: var(--gray-800);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* ============================================
+   LOGIN CONTAINER
+   ============================================ */
+
+.login-container {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    z-index: 10;
+}
+
+.login-card {
+    background: white;
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 15px rgba(15, 90, 127, 0.12);
+    border-top: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.login-card:hover {
+    box-shadow: 0 8px 25px rgba(15, 90, 127, 0.15);
+    background: #f8fbfd;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-header h1 {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.login-header p {
+    color: var(--gray-600);
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   ALERTS
+   ============================================ */
+
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.alert-hidden {
+    display: none;
+}
+
+.alert-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--success-color);
+    color: var(--success-color);
+}
+
+.alert-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+}
+
+/* ============================================
+   FORM
+   ============================================ */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--gray-900);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background-color: var(--gray-50);
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(31, 58, 147, 0.1);
+}
+
+input.error {
+    border-color: var(--danger-color);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+input::placeholder {
+    color: var(--gray-400);
+}
+
+/* ============================================
+   PASSWORD FIELD
+   ============================================ */
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+}
+
+.toggle-pwd {
+    position: absolute;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    transition: var(--transition);
+}
+
+.toggle-pwd:hover {
+    opacity: 0.7;
+}
+
+/* ============================================
+   ERROR MESSAGES
+   ============================================ */
+
+.error-msg {
+    display: block;
+    color: var(--danger-color);
+    font-size: 0.875rem;
+    margin-top: 0.35rem;
+}
+
+/* ============================================
+   FORM OPTIONS
+   ============================================ */
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.forgot-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.forgot-link:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(15, 90, 127, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background: var(--primary-light);
+    box-shadow: 0 6px 20px rgba(15, 90, 127, 0.35);
+}
+
+.btn-login:active {
+    box-shadow: 0 2px 8px rgba(15, 90, 127, 0.2);
+}
+
+.btn-login:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   SIGNUP SECTION
+   ============================================ */
+
+.signup-section {
+    text-align: center;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-200);
+    color: var(--gray-600);
+}
+
+.signup-section a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.signup-section a:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+/* ============================================
+   SECURITY INFO
+   ============================================ */
+
+.security-info {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-left: 4px solid var(--success-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.security-info p {
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.security-info ul {
+    list-style: none;
+    margin: 0;
+}
+
+.security-info li {
+    padding: 0.35rem 0;
+    color: var(--gray-700);
+    font-size: 0.85rem;
+}
+
+/* ============================================
+   BACKGROUND DECORATION
+   ============================================ */
+
+.background-decoration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    z-index: -1;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 1.5rem;
+    }
+
+    .login-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .login-header p {
+        font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 0.65rem 0.75rem;
+        font-size: 16px;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .btn-login {
+        padding: 0.85rem;
+        font-size: 0.95rem;
+    }
+
+    .security-info {
+        padding: 0.75rem;
+    }
+
+    .security-info p {
+        margin-bottom: 0.5rem;
+    }
+
+    .security-info li {
+        font-size: 0.8rem;
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Campus Services Portal - Faculty Dashboard">
+    <title>Faculty Dashboard - Campus Portal</title>
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👩‍🏫</text></svg>">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <h1>🎓 Campus Portal</h1>
+                <p>Faculty Dashboard</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar">👩‍🏫</div>
+                    <h3 id="studentName">Faculty Name</h3>
+                    <p id="studentRoll">Department</p>
+                </div>
+
+                <nav class="menu">
+                    <button class="menu-item active" onclick="showSection('home')">
+                        🏠 Dashboard Home
+                    </button>
+                    <button class="menu-item" onclick="showSection('viewRequests')">
+                        🔍 View Requests
+                    </button>
+                    <button class="menu-item" onclick="showSection('bulkApprove')">
+                        ✅ Bulk Approve
+                    </button>
+                    <button class="menu-item" onclick="showSection('flagged')">
+                        🚩 Flagged Requests
+                    </button>
+                    <button class="menu-item" onclick="showSection('uploadNotices')">
+                        📢 Upload Notices
+                    </button>
+                    <button class="menu-item logout" onclick="logout()">
+                        🚪 Logout
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content">
+                <!-- Dashboard Home Section -->
+                <section id="home-section" class="section active">
+                    <h2>Welcome to Faculty Dashboard</h2>
+                    <div class="dashboard-cards">
+                        <div class="card">
+                            <div class="card-icon">📋</div>
+                            <h3>Overview</h3>
+                            <p>Manage incoming student requests and notices</p>
+                            <button class="btn" onclick="showSection('viewRequests')">View</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">✅</div>
+                            <h3>Bulk Approvals</h3>
+                            <p>Approve multiple pending requests quickly</p>
+                            <button class="btn" onclick="showSection('bulkApprove')">Open</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">🚩</div>
+                            <h3>Flagged Requests</h3>
+                            <p>See and manage flagged or exceptional requests</p>
+                            <button class="btn" onclick="showSection('flagged')">View</button>
+                        </div>
+                        <div class="card">
+                            <div class="card-icon">📢</div>
+                            <h3>Upload Notices</h3>
+                            <p>Publish notices and circulars for students</p>
+                            <button class="btn" onclick="showSection('uploadNotices')">Post</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- View Requests Section -->
+                <section id="viewRequests-section" class="section">
+                    <h2>View Requests</h2>
+                    <div class="filters">
+                        <select id="filterPurpose"><option value="">All Purposes</option><option value="bonafide_exam">Bonafide (Exam)</option><option value="bonafide_scholarship">Bonafide (Scholarship)</option><option value="complaint">Complaint</option></select>
+                        <select id="filterStatus"><option value="">All Status</option><option value="Pending">Pending</option><option value="Approved">Approved</option><option value="Rejected">Rejected</option></select>
+                        <input id="searchText" placeholder="Search by ID or description" />
+                        <button class="btn" onclick="renderRequests()">Apply</button>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="table" id="requestsTable">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Request ID</th>
+                                    <th>Type / Purpose</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Flag</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="requestsTbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Bulk Approve Section -->
+                <section id="bulkApprove-section" class="section">
+                    <h2>Bulk Approve</h2>
+                    <div class="controls">
+                        <button class="btn btn-primary" onclick="bulkApproveSelected()">Approve Selected</button>
+                        <button class="btn" onclick="selectAllVisible(true)">Select All</button>
+                        <button class="btn" onclick="selectAllVisible(false)">Clear Selection</button>
+                    </div>
+                    <table class="table">
+                        <thead><tr><th></th><th>Request ID</th><th>Purpose</th><th>Description</th><th>Status</th></tr></thead>
+                        <tbody id="bulkTbody"></tbody>
+                    </table>
+                </section>
+
+                <!-- Flagged Requests Section -->
+                <section id="flagged-section" class="section">
+                    <h2>Flagged Requests</h2>
+                    <div id="flaggedList"></div>
+                </section>
+
+                <!-- Upload Notices Section -->
+                <section id="uploadNotices-section" class="section">
+                    <h2>Upload Notice</h2>
+                    <form id="noticeForm">
+                        <div class="form-group">
+                            <input id="noticeTitle" placeholder="Title" required />
+                        </div>
+                        <div class="form-group">
+                            <textarea id="noticeBody" rows="4" placeholder="Notice body" required></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Post Notice</button>
+                    </form>
+                    <h3>Posted Notices</h3>
+                    <div id="postedNotices"></div>
+                </section>
+
+            </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2026 Campus Portal. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#privacy">Privacy Policy</a>
+                    <a href="#terms">Terms & Conditions</a>
+                    <a href="#contact">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+    // Reuse the same script logic used for faculty.html earlier (requests stored in localStorage)
+    // The functions below mirror the behavior of the Student/Faculty JS utilities.
+    function showSection(name) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(s => s.classList.remove('active'));
+        const el = document.getElementById(name + '-section');
+        if (el) el.classList.add('active');
+        document.querySelectorAll('.menu-item').forEach(m => m.classList && m.classList.remove('active'));
+        const btn = Array.from(document.querySelectorAll('.menu-item')).find(b => b.getAttribute('onclick') && b.getAttribute('onclick').includes("showSection('" + name + "')"));
+        if (btn) btn.classList.add('active');
+        if (name === 'viewRequests') renderRequests();
+        if (name === 'bulkApprove') renderBulkList();
+        if (name === 'flagged') renderFlagged();
+        if (name === 'uploadNotices') renderNotices();
+    }
+
+    function logout(){ if(confirm('Logout?')) window.location.href='login.html'; }
+
+    function getRequests(){ try{ return JSON.parse(localStorage.getItem('studentRequests')||'[]'); } catch(e) { return []; } }
+    function saveRequests(arr){ localStorage.setItem('studentRequests', JSON.stringify(arr)); }
+    function updateCounts(){ /* optional */ }
+
+    function renderRequests(){ const tbody=document.getElementById('requestsTbody'); tbody.innerHTML = ''; const purpose=document.getElementById('filterPurpose')?document.getElementById('filterPurpose').value:''; const status=document.getElementById('filterStatus')?document.getElementById('filterStatus').value:''; const q=document.getElementById('searchText')?document.getElementById('searchText').value.toLowerCase():''; let arr=getRequests(); arr=arr.filter(r=>{ if(purpose && r.purpose!==purpose) return false; if(status && r.status!==status) return false; if(q){ if(!(r.id.toLowerCase().includes(q)||(r.description||'').toLowerCase().includes(q))) return false; } return true; }); arr.forEach(r=>{ const tr=document.createElement('tr'); tr.innerHTML = `<td><input type="checkbox" class="rowCheck" data-id="${r.id}"></td><td>${r.id}</td><td>${(r.type||'') + ' / ' + (r.purpose? r.purpose.replace(/_/g,' '):'')}</td><td>${(r.description||'')}</td><td><span class="badge ${r.status.toLowerCase()==='pending'?'pending':r.status.toLowerCase()==='approved'?'approved':'rejected'}">${r.status}</span></td><td><input type="checkbox" ${r.flagged? 'checked':''} onchange="toggleFlag('${r.id}',this.checked)"></td><td><button class="btn" onclick="viewRequest('${r.id}')">View</button></td>`; tbody.appendChild(tr); }); }
+
+    function viewRequest(id){ const arr=getRequests(); const r=arr.find(x=>x.id===id); if(!r) return alert('Not found'); alert('Request '+id+'\n\nPurpose: '+r.purpose+'\n\nStatus: '+r.status+'\n\nDesc: '+r.description); }
+    function toggleFlag(id,val){ const arr=getRequests(); const i=arr.findIndex(x=>x.id===id); if(i>-1){ arr[i].flagged=!!val; saveRequests(arr); } }
+
+    function renderBulkList(){ const tbody=document.getElementById('bulkTbody'); tbody.innerHTML=''; const arr=getRequests().filter(r=>r.status==='Pending'); arr.forEach(r=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td><input type="checkbox" class="bulkCheck" data-id="${r.id}"></td><td>${r.id}</td><td>${r.purpose}</td><td>${r.description}</td><td>${r.status}</td>`; tbody.appendChild(tr); }); }
+    function selectAllVisible(on){ document.querySelectorAll('.bulkCheck').forEach(cb=>cb.checked=!!on); document.querySelectorAll('.rowCheck').forEach(cb=>cb.checked=!!on); }
+    function bulkApproveSelected(){ const ids=Array.from(document.querySelectorAll('.bulkCheck:checked')).map(i=>i.getAttribute('data-id')); if(ids.length===0) return alert('No requests selected'); if(!confirm('Approve '+ids.length+' requests?')) return; const arr=getRequests(); arr.forEach(r=>{ if(ids.includes(r.id)) r.status='Approved'; }); saveRequests(arr); renderBulkList(); renderRequests(); alert('Approved '+ids.length+' requests.'); }
+
+    function renderFlagged(){ const div=document.getElementById('flaggedList'); div.innerHTML=''; const arr=getRequests().filter(r=>r.flagged); if(arr.length===0){ div.innerHTML='<p>No flagged requests.</p>'; return; } arr.forEach(r=>{ const d=document.createElement('div'); d.className='notice-item'; d.innerHTML=`<strong>${r.id}</strong> — ${r.purpose.replace(/_/g,' ')}<div style="color:#556">${r.description}</div><div style="margin-top:6px"><button class="btn btn-primary" onclick="approveSingle('${r.id}')">Approve</button> <button class="btn btn-danger" onclick="rejectSingle('${r.id}')">Reject</button></div>`; div.appendChild(d); }); }
+    function approveSingle(id){ if(!confirm('Approve '+id+'?')) return; const arr=getRequests(); const r=arr.find(x=>x.id===id); if(r){ r.status='Approved'; r.flagged=false; saveRequests(arr); renderFlagged(); renderRequests(); } }
+    function rejectSingle(id){ const reason=prompt('Reason for rejection:','Missing docs'); if(reason===null) return; const arr=getRequests(); const r=arr.find(x=>x.id===id); if(r){ r.status='Rejected'; r.reason=reason; saveRequests(arr); renderFlagged(); renderRequests(); } }
+
+    function getNotices(){ try{ return JSON.parse(localStorage.getItem('facultyNotices')||'[]'); } catch(e){ return []; } }
+    function saveNotices(n){ localStorage.setItem('facultyNotices', JSON.stringify(n)); }
+    function renderNotices(){ const div=document.getElementById('postedNotices'); div.innerHTML=''; const n=getNotices(); if(n.length===0){ div.innerHTML='<p>No notices yet.</p>'; return; } n.forEach(nx=>{ const d=document.createElement('div'); d.className='notice-item'; d.innerHTML=`<strong>${nx.title}</strong><div style="color:#556">${nx.body}</div><div style="font-size:12px;color:#889;margin-top:6px">Posted: ${new Date(nx.date).toLocaleString()}</div>`; div.appendChild(d); }); }
+
+    document.getElementById('noticeForm')?.addEventListener('submit', function(e){ e.preventDefault(); const t=document.getElementById('noticeTitle').value; const b=document.getElementById('noticeBody').value; if(!t||!b) return alert('Fill title/body'); const arr=getNotices(); arr.unshift({title:t,body:b,date:new Date().toISOString()}); saveNotices(arr); document.getElementById('noticeForm').reset(); renderNotices(); alert('Notice posted'); });
+
+    // init
+    (function(){ renderNotices(); renderRequests(); })();
+    </script>
+</body>
+</html>

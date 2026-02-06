@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Admin Registration - Campus Services Portal">
+    <title>Admin Registration - Campus Portal</title>
+    <link rel="stylesheet" href="role-signup-styles.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍💼</text></svg>">
+</head>
+<body>
+    <div class="signup-container">
+        <!-- Header -->
+        <div class="header">
+            <a href="registration.html" class="back-btn">← Back</a>
+            <div class="header-content">
+                <h1 class="role-title">👨‍💼 Administrator Registration</h1>
+                <p class="role-subtitle">Join as a system administrator</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="signup-wrapper">
+            <div class="signup-card">
+                <h2>Create Your Admin Account</h2>
+                <p class="form-subtitle">Manage users, view audit logs, and configure system settings</p>
+
+                <div id="alertMessage" class="alert alert-hidden"></div>
+
+                <form id="adminForm" method="POST" action="#" novalidate>
+                    <!-- Full Name -->
+                    <div class="form-group">
+                        <label for="fullName">Full Name *</label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            placeholder="Admin Name"
+                            required 
+                            maxlength="100"
+                        >
+                        <span class="error-msg" id="fullNameError"></span>
+                    </div>
+
+                    <!-- Employee ID -->
+                    <div class="form-group">
+                        <label for="employeeId">Employee ID *</label>
+                        <input 
+                            type="text" 
+                            id="employeeId" 
+                            name="employeeId" 
+                            placeholder="e.g., ADM001"
+                            required 
+                            maxlength="20"
+                        >
+                        <span class="error-msg" id="employeeIdError"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="admin@college.edu"
+                            required 
+                            maxlength="255"
+                        >
+                        <span class="error-msg" id="emailError"></span>
+                    </div>
+
+                    <!-- Department -->
+                    <div class="form-group">
+                        <label for="department">Department *</label>
+                        <select id="department" name="department" required>
+                            <option value="">Select Department</option>
+                            <option value="it">IT Department</option>
+                            <option value="admin">Administration</option>
+                            <option value="finance">Finance</option>
+                            <option value="student">Student Services</option>
+                        </select>
+                        <span class="error-msg" id="departmentError"></span>
+                    </div>
+
+                    <!-- Admin Level -->
+                    <div class="form-group">
+                        <label for="adminLevel">Admin Level *</label>
+                        <select id="adminLevel" name="adminLevel" required>
+                            <option value="">Select Admin Level</option>
+                            <option value="super">Super Administrator</option>
+                            <option value="department">Department Administrator</option>
+                            <option value="moderator">Moderator</option>
+                        </select>
+                        <span class="error-msg" id="adminLevelError"></span>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            placeholder="Enter your 10-digit phone number"
+                            required 
+                            pattern="[0-9]{10}"
+                            maxlength="10"
+                        >
+                        <span class="error-msg" id="phoneError"></span>
+                    </div>
+
+                    <!-- Office Number -->
+                    <div class="form-group">
+                        <label for="officeNumber">Office Location *</label>
+                        <input 
+                            type="text" 
+                            id="officeNumber" 
+                            name="officeNumber" 
+                            placeholder="Building, Floor, Room Number"
+                            required
+                            maxlength="50"
+                        >
+                        <span class="error-msg" id="officeNumberError"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Create a very strong password"
+                                required 
+                                maxlength="128"
+                            >
+                            <button type="button" class="toggle-pwd" id="togglePassword">👁️</button>
+                        </div>
+                        <div class="password-strength" id="passwordStrength"></div>
+                        <p class="password-hint">Minimum 12 characters with uppercase, lowercase, numbers, and special characters</p>
+                        <span class="error-msg" id="passwordError"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                placeholder="Confirm your password"
+                                required 
+                                maxlength="128"
+                            >
+                            <button type="button" class="toggle-pwd" id="toggleConfirm">👁️</button>
+                        </div>
+                        <span class="error-msg" id="confirmError"></span>
+                    </div>
+
+                    <!-- Terms & Conditions -->
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <span>I agree to the Terms & Conditions and Privacy Policy</span>
+                        </label>
+                        <span class="error-msg" id="termsError"></span>
+                    </div>
+
+                    <!-- Security Acknowledgment -->
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="security" name="security" required>
+                            <span>I acknowledge the security responsibilities of an administrator role</span>
+                        </label>
+                        <span class="error-msg" id="securityError"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-submit" id="submitBtn">
+                        <span class="btn-text">Create Admin Account</span>
+                        <span class="btn-loader" style="display: none;">⏳</span>
+                    </button>
+
+                    <!-- Login Link -->
+                    <p class="login-link">Already have an account? <a href="login.html">Login here</a></p>
+                </form>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="benefits-card">
+                <h3>Admin Portal Features</h3>
+                <ul class="benefits-list">
+                    <li>👥 Manage user accounts and roles</li>
+                    <li>📝 Access comprehensive audit logs</li>
+                    <li>⚙️ Configure system settings</li>
+                    <li>📊 Generate system reports</li>
+                    <li>🔐 Security and access control</li>
+                    <li>📧 System notifications</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="role-signup-script.js"></script>
+</body>
+</html>

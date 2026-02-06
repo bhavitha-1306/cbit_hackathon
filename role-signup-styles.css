@@ -1,0 +1,571 @@
+/* ============================================
+   ROLE-BASED SIGNUP PAGES - STYLES
+   ============================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #0f5a7f;
+    --primary-light: #1a7ba5;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+    background: #f0f4f8;
+    min-height: 100vh;
+    color: var(--gray-800);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================
+   SIGNUP CONTAINER
+   ============================================ */
+
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.header {
+    background: var(--primary-color);
+    color: white;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    border-bottom: 3px solid #073e54;
+}
+
+.back-btn {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    transition: color 0.2s ease;
+    font-size: 1.1rem;
+}
+
+.back-btn:hover {
+    opacity: 0.9;
+}
+
+.header-content {
+    text-align: center;
+}
+
+.role-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.role-subtitle {
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+/* ============================================
+   SIGNUP WRAPPER
+   ============================================ */
+
+.signup-wrapper {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: 100%;
+}
+
+/* ============================================
+   SIGNUP CARD
+   ============================================ */
+
+.signup-card {
+    background: white;
+    border-radius: 8px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+    border-top: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.signup-card:hover {
+    box-shadow: 0 8px 20px rgba(15, 90, 127, 0.12);
+    background: #f8fbfd;
+}
+
+.signup-card h2 {
+    font-size: 1.75rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.form-subtitle {
+    color: var(--gray-600);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* ============================================
+   ALERTS
+   ============================================ */
+
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.alert-hidden {
+    display: none;
+}
+
+.alert-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid var(--success-color);
+    color: var(--success-color);
+}
+
+.alert-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--danger-color);
+    color: var(--danger-color);
+}
+
+/* ============================================
+   FORM GROUPS
+   ============================================ */
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--gray-900);
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    background-color: var(--gray-50);
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(31, 58, 147, 0.1);
+}
+
+input.error,
+select.error {
+    border-color: var(--danger-color);
+    background-color: rgba(239, 68, 68, 0.05);
+}
+
+input::placeholder {
+    color: var(--gray-400);
+}
+
+/* ============================================
+   PASSWORD FIELD
+   ============================================ */
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+}
+
+.toggle-pwd {
+    position: absolute;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    transition: var(--transition);
+}
+
+.toggle-pwd:hover {
+    opacity: 0.7;
+}
+
+.password-strength {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: center;
+    display: none;
+}
+
+.password-strength.visible {
+    display: block;
+}
+
+.password-strength.weak {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+}
+
+.password-strength.medium {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--warning-color);
+}
+
+.password-strength.strong {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.password-hint {
+    font-size: 0.85rem;
+    color: var(--gray-600);
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* ============================================
+   CHECKBOXES
+   ============================================ */
+
+.checkbox-group {
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--gray-700);
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-label a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   ERROR MESSAGES
+   ============================================ */
+
+.error-msg {
+    display: block;
+    color: var(--danger-color);
+    font-size: 0.875rem;
+    margin-top: 0.35rem;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(15, 90, 127, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: var(--primary-light);
+    box-shadow: 0 6px 20px rgba(15, 90, 127, 0.35);
+}
+
+.btn-submit:active {
+    box-shadow: 0 2px 8px rgba(15, 90, 127, 0.2);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   LOGIN LINK
+   ============================================ */
+
+.login-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--gray-600);
+}
+
+.login-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================
+   BENEFITS CARD
+   ============================================ */
+
+.benefits-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.6s ease 0.2s both;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+}
+
+.benefits-card h3 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.benefits-list {
+    list-style: none;
+}
+
+.benefits-list li {
+    padding: 0.75rem 0;
+    color: var(--gray-700);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.benefits-list li:last-child {
+    border-bottom: none;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .signup-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .benefits-card {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 1.5rem 1rem;
+    }
+
+    .role-title {
+        font-size: 1.5rem;
+    }
+
+    .role-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .signup-wrapper {
+        margin: 1.5rem auto;
+        padding: 0 1rem;
+    }
+
+    .signup-card {
+        padding: 1.5rem;
+    }
+
+    .signup-card h2 {
+        font-size: 1.5rem;
+    }
+
+    .benefits-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 1rem;
+    }
+
+    .back-btn {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .role-title {
+        font-size: 1.25rem;
+    }
+
+    .role-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .signup-wrapper {
+        margin: 1rem auto;
+        padding: 0 0.75rem;
+        gap: 1.5rem;
+    }
+
+    .signup-card {
+        padding: 1rem;
+    }
+
+    .signup-card h2 {
+        font-size: 1.25rem;
+    }
+
+    .form-subtitle {
+        font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    select {
+        padding: 0.65rem 0.75rem;
+        font-size: 16px;
+    }
+
+    .btn-submit {
+        padding: 0.85rem;
+        font-size: 0.95rem;
+    }
+
+    .benefits-card {
+        padding: 1rem;
+    }
+
+    .benefits-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+
+    .benefits-list li {
+        padding: 0.6rem 0;
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
